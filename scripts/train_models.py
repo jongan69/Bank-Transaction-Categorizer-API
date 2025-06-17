@@ -10,8 +10,8 @@ from torch.utils.data import TensorDataset, DataLoader
 
 # Parameters for fast training on MacBook Air (Apple Silicon, no CUDA)
 DATA_PATH = 'data/main_clean.csv'  # Use the full dataset for training
-CAT_MODEL_PATH = 'models/pt_cat_modelV1'
-SUB_MODEL_PATH = 'models/pt_sub_modelV1'
+CAT_MODEL_PATH = 'models/cat_model_hf'  # Directory for Hugging Face format
+SUB_MODEL_PATH = 'models/subcat_model_hf'  # Directory for Hugging Face format
 BATCH_SIZE = 8  # Faster, fits in RAM
 EPOCHS = 1  # For quick testing
 LEARNING_RATE = 2e-5
@@ -46,7 +46,7 @@ cat_model = DistilBertModel(num_categories, num_subcategories)
 cat_model.to(DEVICE)
 print('Training category model...')
 train_model(cat_model, 'category', cat_train_dataloader, cat_val_dataloader, EPOCHS, LEARNING_RATE, DEVICE)
-torch.save(cat_model.state_dict(), CAT_MODEL_PATH)
+cat_model.bert_model.save_pretrained(CAT_MODEL_PATH)  # Save in Hugging Face format
 print(f'Category model saved to {CAT_MODEL_PATH}')
 
 # Subcategory model
@@ -60,5 +60,5 @@ sub_model = DistilBertModel(num_categories, num_subcategories)
 sub_model.to(DEVICE)
 print('Training subcategory model...')
 train_model(sub_model, 'subcategory', sub_train_dataloader, sub_val_dataloader, EPOCHS, LEARNING_RATE, DEVICE)
-torch.save(sub_model.state_dict(), SUB_MODEL_PATH)
+sub_model.bert_model.save_pretrained(SUB_MODEL_PATH)  # Save in Hugging Face format
 print(f'Subcategory model saved to {SUB_MODEL_PATH}') 
