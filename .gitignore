@@ -1,0 +1,12 @@
+
+models/pt_cat_modelV1
+utils/__pycache__/model.cpython-311.pyc
+models/pt_cat_modelV1
+*.pyc
+models/pt_cat_modelV1
+utils/tempCodeRunnerFile.py
+utils/__pycache__/data_prep.cpython-311.pyc
+models/pt_sub_modelV1
+bin/
+.DS_Store
+.vscode/
