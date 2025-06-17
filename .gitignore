@@ -10,3 +10,6 @@ models/pt_sub_modelV1
 bin/
 .DS_Store
 .vscode/
+__pycache__
+include/
+lib/
